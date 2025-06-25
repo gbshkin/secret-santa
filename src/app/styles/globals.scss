@@ -1,0 +1,13 @@
+@use './vars';
+
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  position: relative;
+}
+h1, h2, h3, h4, p, ul, li {
+  margin: 0;
+  padding: 0;
+}

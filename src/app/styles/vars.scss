@@ -1,0 +1,32 @@
+@function size($px) {
+  @return calc(#{$px} / 1920 * 100vw);
+}
+
+@function sizem($px) {
+  @return calc(#{$px} / 375 * 100vw);
+}
+
+@mixin w {
+  @media (max-width: 3840px) {
+    @content;
+  }
+}
+
+@mixin h {
+  @media (max-height: 1080px) {
+    @content;
+  }
+}
+
+@mixin m {
+  @media (max-width: 1000px) {
+    @content;
+  }
+}
+
+@mixin hover {
+  @media (hover: hover) and (pointer: fine) {
+    @content;
+  }
+}
+

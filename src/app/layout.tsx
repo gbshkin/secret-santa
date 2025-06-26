@@ -1,17 +1,15 @@
-import type { Metadata, Viewport } from 'next'
+
+import { LayoutInner } from './layoutInner'
+import type { Metadata } from 'next'
+import MobileDetect from 'mobile-detect'
 import { headers } from 'next/headers'
 import { type ReactNode } from 'react'
 import '@/app/styles/globals.scss'
-import { LayoutInner } from './layoutInner'
+
 
 export const metadata: Metadata = {
   title: 'Secret Santa',
   description: 'Secret Santa app',
-}
-
-export const viewport: Viewport = {
-  width: 'device-width',
-  initialScale: 1,
 }
 
 
@@ -21,8 +19,13 @@ export default async function RootLayout({
   children: ReactNode
 }) {
 
-  const headersList = await headers()
-  const isMobile = headersList.get('x-is-mobile') === '1'
+
+  const userAgent = (await headers()).get('user-agent') || ''
+
+
+  const md = new MobileDetect(userAgent)
+  const isMobile = !!md.mobile()
+  
 
   return (
     <html lang="ru">
@@ -32,3 +35,4 @@ export default async function RootLayout({
     </html>
   )
 }
+

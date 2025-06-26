@@ -1,22 +1,19 @@
+'use client';
 
-'use client'
-
-import { type ReactNode } from 'react'
-import { LayoutProvider } from './context/provider'
-import { initialLayoutValue } from './context/values'
+import { ReactNode } from 'react';
+import { LayoutProvider } from '@/app/context/providers/layoutProvider';
+import { ThemeProvider } from '@/app/context/providers/themeProvider';
 
 interface LayoutInnerProps {
-  children: ReactNode
-  isMobile: boolean 
+  children: ReactNode;
+  isMobile: boolean;
 }
-
 export function LayoutInner({ children, isMobile }: LayoutInnerProps) {
   return (
-    <LayoutProvider 
-      isMobile={isMobile} 
-      value={{ ...initialLayoutValue, isMobile }} 
-    >
-      {children}
-    </LayoutProvider>
-  )
+    <ThemeProvider> 
+      <LayoutProvider initialIsMobile={isMobile}> 
+        {children}
+      </LayoutProvider>
+    </ThemeProvider>
+  );
 }

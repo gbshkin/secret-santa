@@ -8,6 +8,7 @@ export default function Home() {
   
   const { isMobile } = useLayout();
   console.log(isMobile)
+  console.log('rerender')
 
   return isMobile ? <Mobile /> : <Desktop />;
 }

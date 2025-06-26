@@ -1,5 +1,9 @@
-export interface LayoutContextValue {
+export interface ThemeContextValue {
   theme: 'light' | 'dark';
   toggleTheme: () => void;
-  isMobile: boolean | null;
+}
+
+export interface LayoutContextValue {
+  isMobile: boolean;
+  setIsMobile: (value: boolean) => void;
 }

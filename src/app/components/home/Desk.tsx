@@ -1,9 +1,10 @@
 'use client';
+import styles from '@/app/components/home/Desk.module.scss'
 
 const Desk = () => {
   return (
-    <div>
-    desk
+    <div className={styles.home}>
+      
     </div>
   )
 }

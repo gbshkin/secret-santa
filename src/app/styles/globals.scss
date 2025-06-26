@@ -1,13 +1,37 @@
 @use './vars';
 
-* {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
-}
-body {
-  margin: 0;
-  position: relative;
-}
-h1, h2, h3, h4, p, ul, li {
   margin: 0;
   padding: 0;
+}
+
+:root{
+  --theme_switch_time: .3s;
+}
+
+
+
+.wrapper {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color var(--theme_switch_time), color var(--theme_switch_time);
+  margin: 0;
+  position: relative;
+  @include vars.w {
+    border-radius: vars.size(20);
+  }
+}
+.light-theme {
+  --bg-color: #e7ffe7;
+  --text-color: #333333;
+  --primary-color: #70FBFB;
+}
+
+.dark-theme {
+  --bg-color: #162316;
+  --text-color: #f5f5f5;
+  --primary-color: #386464;
 }

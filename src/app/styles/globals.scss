@@ -9,29 +9,48 @@
 }
 
 :root{
-  --theme_switch_time: .3s;
+  --hover-speed: .3s;
+  --theme-switch-speed: .3s;
+  --header-switch-speed: .3s;
+  --primary-button: #ee585a;
+  --primary-button-hover: #d04d4e;
+  --border-radius: 32px;
 }
 
 
 
 .wrapper {
-  background-color: var(--bg-color);
+  background-color: var(--bg-wrapper);
   color: var(--text-color);
-  transition: background-color var(--theme_switch_time), color var(--theme_switch_time);
+  transition: background-color var(--theme-switch-speed), color var(--theme-switch-speed);
   margin: 0;
   position: relative;
   @include vars.w {
-    border-radius: vars.size(20);
   }
 }
 .light-theme {
-  --bg-color: #e7ffe7;
-  --text-color: #333333;
-  --primary-color: #70FBFB;
+  --bg-wrapper: #f7f6f6;
+  --bg-item: #ffffff;
+  --bg-header: #ffffff;
+  --icon-color: #000;
+  --box-shadow: #48484a29 0px 2px 32px 0px;
+  --primary-text: #181818;;
 }
 
 .dark-theme {
-  --bg-color: #162316;
-  --text-color: #f5f5f5;
-  --primary-color: #386464;
+  --bg-wrapper: #181818;;
+  --bg-header: #181818;
+  --bg-item: #2c2c2e;
+  --icon-color: #f8f7f7;
+  --box-shadow: #00000052 0px 2px 32px 0px;
+  --primary-text: #ffffff;
+}
+.primaryButton {
+  background: var(--primary-button);
+  transform: var(--hover-speed);
+  @include vars.hover {
+    &:hover {
+      background: var(--primary-button-hover);
+    }
+  }
 }

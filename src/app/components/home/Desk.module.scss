@@ -1,5 +1,16 @@
 @use '@/app/styles/vars';
 
 .home {
-  min-height: 100vh;
+  padding: 0 48px 100px 48px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 100px;
+  gap: 20px;
+
+  @include vars.w {
+    padding: 0 vars.size(48) vars.size(100) vars.size(48);
+    margin-top: vars.size(100);
+    gap: vars.size(100);
+  }
 }

@@ -1,8 +1,53 @@
 @use './vars.scss';
 
 .header {
-  background: var(--primary-color);
+  background: transparent;
+  position: sticky;
+  top: 0;
   width: 100%;
-  height: 200px;
-  border-radius: 20px;;
+  height: 96px;
+  padding: 0px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: box-shadow var(----theme-switch-speed),  margin-top(----theme-switch-speed);
+  box-shadow: none;
+  @include vars.w {
+    height: vars.size(96);
+    padding: vars.size(20) vars.size(48);
+  }
+  &.active {
+    background: var(--bg-header);
+    box-shadow: var(--box-shadow);
+  }
+  .logo {
+    width: 40px;
+    height: 40px;
+    stroke: var(--icon-color);
+    transition: stroke var(----theme-switch-speed);
+    @include vars.w {
+      width:  vars.size(40);
+      height: vars.size(40);
+    }
+    path {
+     stroke: var(--icon-color);
+     transition: stroke var(----theme-switch-speed);
+    }
+  }
+}
+.item {
+  border-radius: var(--border-radius);
+  background: var(--bg-item);
+  color: var(--primary-text);
+  padding: 48px;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  @include vars.w {
+    padding: vars.size(48);
+    font-size: vars.sizem(16);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
 }

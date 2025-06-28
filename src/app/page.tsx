@@ -1,6 +1,6 @@
 import  HomePage  from '@/app/components/home';
 import { type Metadata } from 'next';
-import Container from '@/app/components/shared/Container';
+import { Container } from '@/app/components/shared/Container';
 
 export const metadata: Metadata = {
   title: 'Главная | Secret Santa',

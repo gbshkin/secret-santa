@@ -1,25 +1,60 @@
 'use client';
+import { createContext, useState, ReactNode, useEffect, useCallback } from 'react';
 
-import { createContext, useState, ReactNode } from 'react';
-import { ThemeContextValue } from '@/app/context/types';
+type Theme = 'light' | 'dark' | 'system';
+type ResolvedTheme = 'light' | 'dark';
+
+interface ThemeContextValue {
+  theme: Theme;
+  resolvedTheme: ResolvedTheme;
+  setTheme: (theme: Theme) => void;
+}
 
 export const ThemeContext = createContext<ThemeContextValue | null>(null);
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
+  const [state, setState] = useState<{
+    theme: Theme | null;
+    resolvedTheme: ResolvedTheme;
+    mounted: boolean;
+  }>({
+    theme: null,
+    resolvedTheme: 'light',
+    mounted: false
+  });
 
-  const [theme, setTheme] = useState<'light' | 'dark'>('light');
-  const [header, setHeader] = useState<true | false>(false);
+  const applyTheme = useCallback((theme: Theme) => {
+    const resolved = theme === 'system' 
+      ? window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+      : theme;
 
-  const toggleTheme = () => {
-    setTheme(prev => prev === 'light' ? 'dark' : 'light');
-  };
+    document.body.classList.toggle('dark-theme', resolved === 'dark');
+    localStorage.setItem('theme', theme);
+    setState(prev => ({ ...prev, resolvedTheme: resolved }));
+  }, []);
 
-  const toggleHeader = () => {
-    setHeader(prev => !prev);
-  }
+  useEffect(() => {
+    const initialTheme = (localStorage.getItem('theme') as Theme) || 'system';
+    setState({ theme: initialTheme, resolvedTheme: 'light', mounted: true });
+    applyTheme(initialTheme);
+
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    const listener = () => initialTheme === 'system' && applyTheme('system');
+    mediaQuery.addEventListener('change', listener);
+    return () => mediaQuery.removeEventListener('change', listener);
+  }, [applyTheme]);
+
+  if (!state.mounted || state.theme === null) return null;
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme, header, toggleHeader }}>
+    <ThemeContext.Provider value={{
+      theme: state.theme,
+      resolvedTheme: state.resolvedTheme,
+      setTheme: (theme) => {
+        setState(prev => ({ ...prev, theme }));
+        applyTheme(theme);
+      }
+    }}>
       {children}
     </ThemeContext.Provider>
   );

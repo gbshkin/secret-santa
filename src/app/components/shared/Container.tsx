@@ -3,12 +3,11 @@ import { ReactNode, useEffect, useRef, useCallback } from 'react'
 import { useLayout, useTheme } from '@/app/context/hooks/'
 import { ReactLenis } from 'lenis/react'
 import classNames from 'classnames'
-import { Header } from '@/app/components/shared/Header'
+import { Header } from '@/app/components/shared/header/Header'
 
 export function Container({ children }: { children: ReactNode }) {
 
   const { setIsMobile } = useLayout()
-  const { theme, toggleHeader } = useTheme()
 
   
   const lastScrollY = useRef(0)
@@ -23,13 +22,12 @@ export function Container({ children }: { children: ReactNode }) {
 
     if (currentScrollY > SCROLL_THRESHOLD && !headerState.current) {
       headerState.current = true
-      toggleHeader()
     } 
     else if (currentScrollY <= SCROLL_THRESHOLD && headerState.current) {
       headerState.current = false
-      toggleHeader()
+  
     }
-  }, [toggleHeader])
+  }, [])
 
   const onResize = useCallback(() => {
     setIsMobile?.(window.innerWidth <= 1000)
@@ -48,7 +46,7 @@ export function Container({ children }: { children: ReactNode }) {
 
   return (
     <ReactLenis root>
-      <div className={classNames('wrapper', `${theme}-theme`)}>
+      <div className={'wrapper'}>
         <Header />
         {children}
       </div>

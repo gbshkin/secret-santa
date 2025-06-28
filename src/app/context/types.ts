@@ -1,8 +1,10 @@
+
+export type Theme = 'light' | 'dark' | 'system';
+
 export interface ThemeContextValue {
-  theme: 'light' | 'dark';
-  toggleTheme: () => void;
-  header:  boolean;
-  toggleHeader: () => void;
+  theme:'light' | 'dark' | 'system';
+  resolvedTheme: 'light' | 'dark';
+  setTheme: (theme: Theme) => void;
 }
 
 export interface LayoutContextValue {

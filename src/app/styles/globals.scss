@@ -6,15 +6,37 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  font-family: var(--font-slussen);
 }
 
-:root{
+
+:root {
+  --font-slussen: 'Slussen', -apple-system, sans-serif;
+
   --hover-speed: .3s;
   --theme-switch-speed: .3s;
   --header-switch-speed: .3s;
   --primary-button: #ee585a;
   --primary-button-hover: #d04d4e;
   --border-radius: 32px;
+  --grey-color: #96969a;
+  --bg-wrapper: #f7f6f6;
+  --bg-item: #ffffff;
+  --bg-header: #ffffff;
+  --toggle-icon-color: #000;
+  --box-shadow: #48484a29 0px 2px 32px 0px;
+  --primary-text: #181818;
+  --primary-hover-color: #d04d4e;
+}
+
+::selection {
+  background: var(--primary-hover-color);
+  color: var(--primary-text);
+}
+
+::-moz-selection {
+  background: var(--primary-hover-color);
+  color: var(--primary-text);
 }
 
 
@@ -25,29 +47,27 @@
   transition: background-color var(--theme-switch-speed), color var(--theme-switch-speed);
   margin: 0;
   position: relative;
-  @include vars.w {
-  }
-}
-.light-theme {
-  --bg-wrapper: #f7f6f6;
-  --bg-item: #ffffff;
-  --bg-header: #ffffff;
-  --icon-color: #000;
-  --box-shadow: #48484a29 0px 2px 32px 0px;
-  --primary-text: #181818;;
+
+  @include vars.w {}
+
 }
 
+
 .dark-theme {
-  --bg-wrapper: #181818;;
+  --bg-wrapper: #181818;
   --bg-header: #181818;
   --bg-item: #2c2c2e;
-  --icon-color: #f8f7f7;
+  --toggle-icon-color: #f8f7f7;
   --box-shadow: #00000052 0px 2px 32px 0px;
   --primary-text: #ffffff;
+
+
 }
-.primaryButton {
+
+.wrapper .primaryButton {
   background: var(--primary-button);
   transform: var(--hover-speed);
+
   @include vars.hover {
     &:hover {
       background: var(--primary-button-hover);
